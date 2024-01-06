@@ -277,7 +277,7 @@ Credit: https://github.com/sudheerj
        ```bash
        cat file_name1 file_name2
        ```
-   3. **More & Less options:** If a file having a large number of content that won’t fit in the output terminal then `more` & `less` options can be used to indiate additional content.
+   3. **More & Less options:** If a file having a large number of content that won’t fit in the output terminal then `more` & `less` options can be used to indicate additional content.
 
        ```bash
        cat file_name1.txt | more
