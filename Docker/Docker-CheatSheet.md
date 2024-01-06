@@ -610,5 +610,97 @@ VOLUME /test
 
 ### Docker Compose
    Docker compose(or compose) is a tool for defining and running multi-container Docker applications.
-### Docker Swarm
-   Docker Swarm(or swarm) is an open-source tool used to cluster and orchestrate Docker containers.
+
+#### Basic Commands
+
+- **`docker-compose up`**:
+  - Create and start containers defined in the `docker-compose.yml` file.
+  - `-d`: Run containers in the background.
+- **`docker-compose down`**:
+  - Stop and remove containers, networks, and volumes.
+  - `--volumes`: Remove named volumes declared in the `volumes` section of the `docker-compose.yml`.
+
+#### Managing Services
+
+- **`docker-compose ps`**:
+  - List running services in the current Compose project.
+- **`docker-compose start <service-name>`**:
+  - Start a specific service.
+- **`docker-compose stop <service-name>`**:
+  - Stop a specific service.
+- **`docker-compose restart <service-name>`**:
+  - Restart a specific service.
+
+#### Scaling Services
+
+- **`docker-compose up --scale <service-name>=<num>`**:
+  - Scale a service to run a specific number of instances.
+  
+#### Viewing Logs
+
+- **`docker-compose logs`**:
+  - View aggregated logs for all services.
+  - `-f`: Follow log output.
+  - `<service-name>`: View logs for a specific service.
+
+#### Executing Commands
+
+- **`docker-compose exec <service-name> <command>`**:
+  - Execute a command in a running service.
+
+#### Docker Compose File
+
+The `docker-compose.yml` file is used to define the structure of multi-container Docker applications. It includes services, networks, volumes, and other configurations required to run the application.
+
+#### Example `docker-compose.yml` File
+
+```yaml
+version: '3.8'
+
+services:
+  web:
+    build: ./webapp               # Path to the directory containing the Dockerfile
+    image: custom_image           # Specify the image name explicitly
+    container_name: web_container # Assign a specific name to the container
+    restart: always               # Always restart the container if it stops
+    command: [sh, -c, 'echo Hello from the container']  # Override the default command
+    entrypoint: /app/start.sh     # Override the default entrypoint
+    environment:                  # Set environment variables
+      - DEBUG=1
+    ports:
+      - "5000:5000"               # Port mapping (host_port:container_port)
+    volumes:
+      - /path/to/local:/app       # Bind mount local directory to container
+      - volume_name:/app/data     # Mount a named volume
+    networks:
+      - frontend                  # Connect to specific networks
+      - backend
+    depends_on:
+      - db                        # Service dependency
+    links:
+      - db:mysql                  # Legacy linking between containers
+
+  db:
+    image: postgres:latest        # Pull the latest PostgreSQL image
+    container_name: db_container  # Assign a specific name to the container
+    restart: always               # Always restart the container if it stops
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Mount a volume for persistent data
+    networks:
+      - backend                   # Connect to a specific network
+
+  redis:
+    image: redis:latest           # Pull the latest Redis image
+    container_name: redis_container # Assign a specific name to the container
+    restart: always               # Always restart the container if it stops
+    networks:
+      - backend                   # Connect to a specific network
+
+volumes:
+  db_data:                        # Define a named volume for database data
+
+networks:
+  frontend:                       # Define a custom network
+  backend:                        # Define another custom network
+
+```
