@@ -93,7 +93,7 @@ pipeline {
 
 ```
 
-# Parallel Execution:
+# Parallel Execution
 
 ``` java
 pipeline {
@@ -117,7 +117,7 @@ pipeline {
     }
 }
 ```
-# Docker Integration:
+# Docker Integration
 
 ```groovy
 pipeline {
@@ -134,7 +134,7 @@ pipeline {
     }
 }
 ```
-# Artifacts:
+# Artifacts
 
 ```java
 pipeline {
@@ -150,7 +150,7 @@ pipeline {
     }
 }
 ```
-# Deployment:
+# Deployment
 
 ```java
 pipeline {
@@ -174,7 +174,7 @@ pipeline {
     }
 }
 ```
-# Conditional Execution:
+# Conditional Execution
 
 ```java
 pipeline {
@@ -192,7 +192,7 @@ pipeline {
     }
 }
 ```
-# Notifications:
+# Notifications
 ```java
 
 pipeline {
